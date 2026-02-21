@@ -15,8 +15,9 @@ const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
 // users routing
 const Users = Loadable(lazy(() => import('views/users')));
 
-// users routing
+// shows routing
 const Shows = Loadable(lazy(() => import('views/shows')));
+const ShowDetails = Loadable(lazy(() => import('views/shows/ShowDetails')));
 
 
 // sample page routing
@@ -52,6 +53,10 @@ const MainRoutes = {
     {
       path: 'shows',
       element: <Shows />
+    },
+    {
+      path: '/show-details/:id',
+      element: <ShowDetails />
     },
     {
       path: 'color',

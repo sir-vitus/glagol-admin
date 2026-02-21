@@ -31,9 +31,9 @@ export default function Users() {
   }, [getUsers]);
   
   return (
-    <MainCard title="Users">
+    <MainCard title="Актёры">
       <Typography variant="body2">
-        {users.length} Users 
+        {users.length} актёров 
       </Typography>
       {users.map((user, index) => (
         <SubCard key={index}>{user.name}</SubCard>

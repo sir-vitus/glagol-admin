@@ -1,16 +1,14 @@
 import { useCallback, useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 // third-party
 import axios from 'axios';
 // material-ui
 import Typography from '@mui/material/Typography';
 
+
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import SubCard from 'ui-component/cards/SubCard';
-//import { getContacts } from '../../store/slices/contact';
-//import axiosServices from '../../utils/axios';
-
+import Accordion from 'ui-component/extended/Accordion';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 export default function Shows() {
@@ -19,7 +17,7 @@ export default function Shows() {
   //const contacts = await getContacts()
   const getShows = useCallback(async () => {
     try {
-      const response = await axios.get('https://glagoltheatre.ru/api/events?type=1');
+      const response = await axios.get('https://glagoltheatre.ru/api/shows');
       setShows(response.data);
     } catch (error) {
       console.log(error);
@@ -29,15 +27,17 @@ export default function Shows() {
   useEffect(() => {
     getShows();
   }, [getShows]);
+
+  const getShowContent = (item) => <div><Link to={`/show-details/${item.id}`}>Подробнее</Link></div>
+  const getAccData = () => shows.map(show => { return{title: show.name, id: show.id, content:getShowContent(show)}}) 
   
   return (
     <MainCard title="Спектакли">
       <Typography variant="body2">
-        {shows.length} спектакля 
+        {shows.length} спектаклей
       </Typography>
-      {shows.map((show, index) => (
-        <SubCard key={index}>{show.name}</SubCard>
-      ))}
+      <Accordion data={getAccData()}></Accordion>
+      
     </MainCard>
   );
 }
