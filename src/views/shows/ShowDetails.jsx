@@ -61,7 +61,12 @@ export default function ShowDetails() {
     console.log('Deleting item with id:', performer.characterID, performer.personID);
       //e.preventDefault()
       if(!performer) return
-      const response = await axios.delete(`https://glagoltheatre.ru/api/shows/performer/${performer.characterID}/${performer.personID}`);
+      const url = `https://www.glagoltheatre.ru/api/shows/performer/${performer.characterID}/${performer.personID}`;
+      //const url = `https://www.glagoltheatre.ru/api/events/1203`;
+      const response = await axios.delete(url, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        }});
       console.log(response.data)
       getShow();
   };
