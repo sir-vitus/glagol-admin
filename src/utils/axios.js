@@ -4,7 +4,8 @@
 
 import axios from 'axios';
 
-const axiosServices = axios.create({ baseURL: import.meta.env.VITE_APP_API_URL || 'http://localhost:3010/' });
+const axiosServices = axios.create({ baseURL: import.meta.env.VITE_APP_API_URL || 'http://localhost:3010/', 
+    validateStatus: (status) => { return (status >= 200 && status < 300) || status === 404 }});
 
 // ==============================|| AXIOS - FOR MOCK SERVICES ||============================== //
 

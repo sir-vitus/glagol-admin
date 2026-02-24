@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 // material-ui
 import Typography from '@mui/material/Typography';
+import {Button} from '@mui/material';
 
 
 // project imports
@@ -28,7 +29,7 @@ export default function Shows() {
     getShows();
   }, [getShows]);
 
-  const getShowContent = (item) => <div><Link to={`/show-details/${item.id}`}>Подробнее</Link></div>
+  const getShowContent = (item) => <div><Link to={`/show-details/${item.id}`}><Button>Подробнее</Button></Link></div>
   const getAccData = () => shows.map(show => { return{title: show.name, id: show.id, content:getShowContent(show)}}) 
   
   return (
@@ -36,7 +37,7 @@ export default function Shows() {
       <Typography variant="body2">
         {shows.length} спектаклей
       </Typography>
-      <Accordion data={getAccData()}></Accordion>
+      <Accordion data={getAccData()} toggle={true}></Accordion>
       
     </MainCard>
   );

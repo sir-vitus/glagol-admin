@@ -1,5 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // third-party
 import axios from 'axios';
 // material-ui
@@ -13,6 +14,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import {ArrowBack} from '@mui/icons-material';
 import Tooltip from '@mui/material/Tooltip';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -91,7 +93,7 @@ export default function ShowDetails() {
         <SubCard title="Исполнители">
           {item.performers.map(p => (
             <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-       <Typography variant="subtitle1" sx={{ color: 'inherit' }}> {p.name}</Typography>
+       <Typography variant="body2" sx={{ color: 'inherit' }}> {p.name}</Typography>
        <DeleteIconButtonWithConfirmation item={p} onDelete={handleDeletePerformer} />
         </Stack>
           ))}
@@ -127,8 +129,11 @@ export default function ShowDetails() {
       getShow();
     }
 
+    const backBtn = <Link to={`/shows`}><ArrowBack></ArrowBack></Link>
+        
+     
 return (
-    <MainCard title={show.name}>
+    <MainCard title={show.name} secondary={backBtn}>
       <Typography variant="body2"></Typography>
         <SubCard title="Роли">
       <Grid container spacing={{ xs: 0, sm: 2 }} alignItems="center">
@@ -148,7 +153,7 @@ return (
         </AnimateButton>
         </Grid>
       </Grid>
-      <Accordion data={getAccData()}></Accordion></SubCard>
+      <Accordion data={getAccData()} toggle={true}></Accordion></SubCard>
       
       
     </MainCard>

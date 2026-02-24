@@ -26,6 +26,7 @@ import UpgradePlanCard from './UpgradePlanCard';
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import useConfig from 'hooks/useConfig';
+import useAuth from 'hooks/useAuth';
 
 // assets
 import User1 from 'assets/images/users/user-round.svg';
@@ -43,7 +44,9 @@ export default function ProfileSection() {
   const [value, setValue] = useState('');
   const [notification, setNotification] = useState(false);
   const [open, setOpen] = useState(false);
-
+  const {logOut, authUser, isLoggedIn} = useAuth()
+  console.log(isLoggedIn)
+  console.table(authUser)
   /**
    * anchorRef is used on different components and specifying one type leads to other components throwing an error
    * */
@@ -52,6 +55,8 @@ export default function ProfileSection() {
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+
+  const handleLogOut = () => logOut()
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -119,9 +124,9 @@ export default function ProfileSection() {
                     <Box sx={{ p: 2, pb: 0 }}>
                       <Stack>
                         <Stack direction="row" sx={{ alignItems: 'center', gap: 0.5 }}>
-                          <Typography variant="h4">Good Morning,</Typography>
+                          <Typography variant="h4">Привет,</Typography>
                           <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                            Johne Doe
+                            {isLoggedIn ? authUser.name : 'Незнакомец'}
                           </Typography>
                         </Stack>
                         <Typography variant="subtitle2">Project Admin</Typography>
@@ -206,7 +211,7 @@ export default function ProfileSection() {
                             }
                           />
                         </ListItemButton>
-                        <ListItemButton sx={{ borderRadius: `${borderRadius}px` }}>
+                        <ListItemButton sx={{ borderRadius: `${borderRadius}px` }} onClick={handleLogOut}>
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="20px" />
                           </ListItemIcon>

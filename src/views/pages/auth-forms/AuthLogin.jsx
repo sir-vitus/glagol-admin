@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // material-ui
 import Button from '@mui/material/Button';
@@ -16,6 +16,10 @@ import Box from '@mui/material/Box';
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import CustomFormControl from 'ui-component/extended/Form/CustomFormControl';
+import useAuth from 'hooks/useAuth'
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import axiosServices from 'utils/axios';
+import { fetcher } from '../../../utils/axios';
 
 // assets
 import Visibility from '@mui/icons-material/Visibility';
@@ -25,29 +29,55 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export default function AuthLogin() {
   const [checked, setChecked] = useState(true);
+  const { setAuth, authUser } = useAuth()
+  //const { state, setState, setField, resetState } = useLocalStorage('isAuthenticated', false);
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState('');
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+    console.log('handleMouseDownPassword')
+  };
+
+  const handleLoginButtonClick = async (event) => {
+    event.preventDefault();
+    console.log(password)
+    //m3eE605z8uy
+    const url = '/user/' + password
+    const res = await axiosServices.get(url);
+    console.log(res.status)
+    if(res.status === 200) {
+      setAuth(res.data)
+    }
+    //const res = await fetcher('/user/m3eE605z8uy1', options)
+    console.table(authUser)
+    navigate('/', { replace: true });
+  };
+
+  const handleChange = (event) => {
+    // Update the state with the new value as the user types
+    setPassword(event.target.value);
   };
 
   return (
     <>
-      <CustomFormControl fullWidth>
+      {false && (<CustomFormControl fullWidth>
         <InputLabel htmlFor="outlined-adornment-email-login">Email Address / Username</InputLabel>
         <OutlinedInput id="outlined-adornment-email-login" type="email" value="info@codedthemes.com" name="email" />
-      </CustomFormControl>
+      </CustomFormControl>)}
 
       <CustomFormControl fullWidth>
-        <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-password-login">Пароль</InputLabel>
         <OutlinedInput
+          onChange={handleChange}
           id="outlined-adornment-password-login"
           type={showPassword ? 'text' : 'password'}
-          value="123456"
+          value={password}
           name="password"
           endAdornment={
             <InputAdornment position="end">
@@ -81,7 +111,7 @@ export default function AuthLogin() {
       </Grid>
       <Box sx={{ mt: 2 }}>
         <AnimateButton>
-          <Button color="secondary" fullWidth size="large" type="submit" variant="contained">
+          <Button color="secondary" fullWidth size="large" type="submit" variant="contained" onClick={handleLoginButtonClick}>
             Sign In
           </Button>
         </AnimateButton>

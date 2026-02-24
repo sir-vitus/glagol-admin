@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
+import AuthGuard from 'utils/route-guard/AuthGuard';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -31,14 +32,14 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+      element: <Shows />
     },
     {
       path: 'dashboard',
       children: [
         {
+          element: <DashboardDefault />,
           path: 'default',
-          element: <DashboardDefault />
         }
       ]
     },
@@ -52,7 +53,7 @@ const MainRoutes = {
     },
     {
       path: 'shows',
-      element: <Shows />
+      element: <AuthGuard><Shows /></AuthGuard>
     },
     {
       path: '/show-details/:id',
@@ -60,7 +61,7 @@ const MainRoutes = {
     },
     {
       path: 'color',
-      element: <UtilsColor />
+      element: <AuthGuard><UtilsColor /></AuthGuard>
     },
     {
       path: 'shadow',

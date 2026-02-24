@@ -36,7 +36,7 @@ export default function Login() {
                     Hi, Welcome Back
                   </Typography>
                   <Typography variant="caption" sx={{ fontSize: '16px', textAlign: { xs: 'center', md: 'inherit' } }}>
-                    Enter your credentials to continue
+                    Скажи, друг, и войди
                   </Typography>
                 </Stack>
                 <Box sx={{ width: 1 }}>

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionActions from '@mui/material/AccordionActions';
 import Box from '@mui/material/Box';
 
 // assets
@@ -42,6 +43,7 @@ export default function Accordion({ data, defaultExpandedId = null, expandIcon, 
               {item.title}
             </MuiAccordionSummary>
             <MuiAccordionDetails>{item.content}</MuiAccordionDetails>
+            {/*<MuiAccordionActions>Action 1</MuiAccordionActions>--*/}
           </MuiAccordion>
         ))}
     </Box>
