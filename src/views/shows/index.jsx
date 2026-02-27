@@ -15,7 +15,6 @@ import Accordion from 'ui-component/extended/Accordion';
 export default function Shows() {
   
   const [shows, setShows] = useState([]);
-  //const contacts = await getContacts()
   const getShows = useCallback(async () => {
     try {
       const response = await axios.get('https://glagoltheatre.ru/api/shows');
@@ -33,9 +32,9 @@ export default function Shows() {
   const getAccData = () => shows.map(show => { return{title: show.name, id: show.id, content:getShowContent(show)}}) 
   
   return (
-    <MainCard title="Спектакли">
+    <MainCard title={"Спектакли (" + shows.length + ")"}>
       <Typography variant="body2">
-        {shows.length} спектаклей
+         
       </Typography>
       <Accordion data={getAccData()} toggle={true}></Accordion>
       

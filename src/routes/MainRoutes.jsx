@@ -7,6 +7,7 @@ import AuthGuard from 'utils/route-guard/AuthGuard';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
+const DashboardShowsAvailability = Loadable(lazy(() => import('views/dashboard/shows-availability')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -32,7 +33,7 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <Shows />
+      element: <AuthGuard><Shows /></AuthGuard>
     },
     {
       path: 'dashboard',
@@ -40,6 +41,10 @@ const MainRoutes = {
         {
           element: <DashboardDefault />,
           path: 'default',
+        },
+        {
+          element: <DashboardShowsAvailability />,
+          path: 'shows-availability',
         }
       ]
     },

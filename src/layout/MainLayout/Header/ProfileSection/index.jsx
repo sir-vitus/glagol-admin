@@ -56,7 +56,11 @@ export default function ProfileSection() {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleLogOut = () => logOut()
+  const handleLogOut = () => {
+    logOut()
+    setOpen(false)
+    window.location.reload()
+  }
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {

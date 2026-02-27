@@ -1,8 +1,8 @@
 // assets
-import { IconDashboard } from '@tabler/icons-react';
+import { IconDashboard, IconCalendar } from '@tabler/icons-react';
 
 // constant
-const icons = { IconDashboard };
+const icons = { IconDashboard, IconCalendar };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -17,6 +17,14 @@ const dashboard = {
       type: 'item',
       url: '/dashboard/default',
       icon: icons.IconDashboard,
+      breadcrumbs: false
+    },
+    {
+      id: 'shows-availability',
+      title: 'Планирование',
+      type: 'item',
+      url: '/dashboard/shows-availability',
+      icon: icons.IconCalendar,
       breadcrumbs: false
     }
   ]
