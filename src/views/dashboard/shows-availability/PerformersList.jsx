@@ -7,7 +7,7 @@ export default function PerformersList({data}) {
     return (<>
     {data.map((item, idx) =>{ 
       const response = item.response ?? 0
-      const color = response === 1 ? 'green' : response === 2 ? 'red' : response === 3 ? 'yellow' : 'grey.800'
+      const color = response === 1 ? 'green' : response === 2 ? 'red' : response === 3 ? 'yellow' : 'grey.400'
       const icon = response === 1 ? <IconCheck /> : response === 2 ? <IconAlertTriangle /> : response === 3 ? <IconCheck /> : <IconCheck />
       const title =<Grid container sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
             <Grid sx={{p: 1}}>

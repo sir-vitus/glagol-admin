@@ -37,41 +37,6 @@ export default function ShowsAvailability() {
         <MainCard title={"Спектакли (" + shows.length + ")"}>
 
     <DatesAccordion dates={dates}></DatesAccordion>
-    <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-      <thead>
-        <tr style={{ backgroundColor: '#f2f2f2' }}>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Спектакли</th>
-
-          {dates.map((date) => (
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>{new Date(date.date).toDateString()}</th>
-
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {shows.map((show, idx) => (
-          <tr key={show.id}>
-            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{show.name}</td>
-            {dates.map((date) => (
-            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{
-                date.shows[idx].color == 'green' ?       
-                    <Tooltip title="Да">
-                        <IconButton aria-label="yes" onClick={handleClick}>
-                          <IconCheck />
-                        </IconButton>
-                      </Tooltip> :  <Tooltip title={date.shows[idx].characters.filter(c=>c.color==='red').map(c=>c.name).join(', ')}>
-                        <IconButton aria-label="no" onClick={handleClick}>
-                          <IconAlertTriangle />
-                        </IconButton>
-                      </Tooltip>
-                
-            }</td>
-
-          ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
     </MainCard>
     )
 }
