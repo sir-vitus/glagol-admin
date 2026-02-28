@@ -12,18 +12,18 @@ const dashboard = {
   type: 'group',
   children: [
     {
-      id: 'default',
-      title: 'Dashboard',
-      type: 'item',
-      url: '/dashboard/default',
-      icon: icons.IconDashboard,
-      breadcrumbs: false
-    },
-    {
       id: 'shows-availability',
       title: 'Планирование',
       type: 'item',
       url: '/dashboard/shows-availability',
+      icon: icons.IconDashboard,
+      breadcrumbs: false
+    },
+    {
+      id: 'shows-availability-table',
+      title: 'Таблица спектаклей',
+      type: 'item',
+      url: '/dashboard/shows-availability-table',
       icon: icons.IconCalendar,
       breadcrumbs: false
     }

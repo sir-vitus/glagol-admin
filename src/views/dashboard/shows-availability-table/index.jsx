@@ -11,9 +11,8 @@ const icons = { IconCheck, IconAlertTriangle };
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import axiosServices from 'utils/axios';
-import DatesAccordion from './DatesAccordion';
 
-export default function ShowsAvailability() {
+export default function ShowsAvailabilityTable() {
   const [dates, setDates] = useState([]);
   const getDates = useCallback(async () => {
     try {
@@ -35,15 +34,14 @@ export default function ShowsAvailability() {
 
     return (
         <MainCard title={"Спектакли (" + shows.length + ")"}>
-
-    <DatesAccordion dates={dates}></DatesAccordion>
+    
     <table style={{ borderCollapse: 'collapse', width: '100%' }}>
       <thead>
         <tr style={{ backgroundColor: '#f2f2f2' }}>
           <th style={{ border: '1px solid #ddd', padding: '8px' }}>Спектакли</th>
 
           {dates.map((date) => (
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>{new Date(date.date).toDateString()}</th>
+            <th style={{ border: '1px solid #ddd', padding: '8px' }}>{(new Date(date.date)).toLocaleDateString()}</th>
 
           ))}
         </tr>
