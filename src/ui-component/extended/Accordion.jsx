@@ -43,7 +43,7 @@ export default function Accordion({ data, defaultExpandedId = null, expandIcon, 
               {item.title}
             </MuiAccordionSummary>
             <MuiAccordionDetails>{item.content}</MuiAccordionDetails>
-            {/*<MuiAccordionActions>Action 1</MuiAccordionActions>--*/}
+            {item.actions &&  <MuiAccordionActions>{item.actions}</MuiAccordionActions> }
           </MuiAccordion>
         ))}
     </Box>

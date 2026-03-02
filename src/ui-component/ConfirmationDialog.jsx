@@ -22,10 +22,10 @@ const ConfirmationDialog = ({ open, handleClose, handleConfirm, title, descripti
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Cancel
+          Отмена
         </Button>
         <Button onClick={handleConfirm} color="error" autoFocus>
-          Delete
+          Удалить
         </Button>
       </DialogActions>
     </Dialog>

@@ -22,7 +22,9 @@ import SubCard from 'ui-component/cards/SubCard';
 import Accordion from 'ui-component/extended/Accordion';
 import CustomFormControl from 'ui-component/extended/Form/CustomFormControl';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import ConfirmationDialog from 'ui-component/ConfirmationDialog';
+import DeleteIconButtonWithConfirmation from 'ui-component/DeleteIconButtonWithConfirmation';
+import ManagersList from './ManagersList';
+//import CollapseCard from '../../ui-component/cards/CollapseCard';
 
 export default function ShowDetails() {
   const { id } = useParams(); // Get the 'id' parameter from the URL
@@ -45,6 +47,10 @@ export default function ShowDetails() {
   useEffect(() => {
     getShow();
   }, [getShow]);
+
+  const onUpdate = () => {
+    getShow()
+  }
 
   const getActors = useCallback(async () => {
     try {
@@ -72,8 +78,14 @@ export default function ShowDetails() {
       console.log(response.data)
       getShow();
   };
+  const mainAccordionData = [
+    {title: <Typography variant='subtitle1' sx={{ color: 'grey.800'}}>Роли</Typography>, id: 1, content: <>Roles goes here</>},
+    {title: <Typography variant='subtitle1' sx={{ color: 'grey.800'}}>Помрежи</Typography>, id: 2, 
+      content: <ManagersList item={show} actors={actors} onUpdate={onUpdate}></ManagersList>},
+  ]
 
-  const getCharacterContent = (item) => <Stack  spacing={2} key={item.id}> 
+  const getCharacterContent = (item) => 
+          <Stack  spacing={2} key={item.id}> 
             <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'center', justifyContent: 'left' }}>
               <TextField  id="standard-select-currency" select value={selectedActor} sx={{ minWidth: 200 }}
                  onChange={(e) => setSelectedActor(e.target.value)}>
@@ -100,7 +112,7 @@ export default function ShowDetails() {
                 </SubCard>
     </Stack >
   const getAccData = () => show.characters ? 
-    show.characters.map(c => { return{title: c.name, id: c.id, content:getCharacterContent(c)}}) 
+    show.characters.map(c => { return {title: c.name, id: c.id, content:getCharacterContent(c)}}) 
     : []
 
     const handleNewCharacterClick = async (e) => {
@@ -134,7 +146,7 @@ export default function ShowDetails() {
      
 return (
     <MainCard title={show.name} secondary={backBtn}>
-      <Typography variant="body2"></Typography>
+      
         <SubCard title="Роли">
       <Grid container spacing={{ xs: 0, sm: 2 }} alignItems="center">
         <Grid size={{ xs: 12, sm: 9 }}>
@@ -153,42 +165,10 @@ return (
         </AnimateButton>
         </Grid>
       </Grid>
-      <Accordion data={getAccData()} toggle={true}></Accordion></SubCard>
-      
+      <Accordion data={getAccData()} toggle={true}></Accordion>
+      </SubCard>
+      <Accordion data={mainAccordionData} toggle={true}></Accordion>
       
     </MainCard>
   );}
 
-const DeleteIconButtonWithConfirmation = ({ item, onDelete }) => {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleConfirm = () => {
-    onDelete(item);
-    handleClose();
-  };
-
-  return (
-    <>
-      <Tooltip title="Удалить">
-        <IconButton aria-label="delete" onClick={handleClickOpen}>
-          <DeleteIcon />
-        </IconButton>
-      </Tooltip>
-      <ConfirmationDialog
-        open={open}
-        handleClose={handleClose}
-        handleConfirm={handleConfirm}
-        title="Подтверждение удаления"
-        description={`Точно удалить?`}
-      />
-    </>
-  );
-};

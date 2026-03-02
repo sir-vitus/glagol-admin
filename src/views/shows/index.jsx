@@ -28,8 +28,11 @@ export default function Shows() {
     getShows();
   }, [getShows]);
 
-  const getShowContent = (item) => <div><Link to={`/show-details/${item.id}`}><Button>Подробнее</Button></Link></div>
-  const getAccData = () => shows.map(show => { return{title: show.name, id: show.id, content:getShowContent(show)}}) 
+  const getShowContent = (item) => <></>
+  const getAccData = () => shows.map(show => {
+    const actions = <Link to={`/show-details/${show.id}`}><Button>Редактировать</Button></Link>
+    return{title: show.name, id: show.id, content:getShowContent(show), actions: actions }
+  }) 
   
   return (
     <MainCard title={"Спектакли (" + shows.length + ")"}>
