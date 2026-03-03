@@ -9,13 +9,11 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {ArrowBack} from '@mui/icons-material';
-import Tooltip from '@mui/material/Tooltip';
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import DeleteIconButtonWithConfirmation from 'ui-component/DeleteIconButtonWithConfirmation';
 import axiosServices from 'utils/axios';
+import AdminGuard from 'utils/access-guards/AdminGuard';
 
 export default function ManagersList({item, actors, onUpdate}) {
   const [selectedActor, setSelectedActor] = useState('');
@@ -43,7 +41,7 @@ export default function ManagersList({item, actors, onUpdate}) {
       onUpdate();
     }
     return (<>
-     <Stack  spacing={2} key={item.id}> 
+     <Stack  spacing={2} key={item.id}> <AdminGuard>
             <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'center', justifyContent: 'left' }}>
               <TextField  id="standard-select-currency" select value={selectedActor} sx={{ minWidth: 200 }}
                  onChange={(e) => setSelectedActor(e.target.value)}>
@@ -59,11 +57,11 @@ export default function ManagersList({item, actors, onUpdate}) {
                         Добавить помрежа
                     </Button>
                 </AnimateButton>                
-             </Stack>
+             </Stack></AdminGuard>
           {data && data.map(p => (
             <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
        <Typography variant="body2" sx={{ color: 'inherit' }}> {p.name}</Typography>
-       <DeleteIconButtonWithConfirmation item={p} onDelete={handleDeleteManager} />
+       <AdminGuard><DeleteIconButtonWithConfirmation item={p} onDelete={handleDeleteManager} /></AdminGuard>
         </Stack>
           ))}
                 

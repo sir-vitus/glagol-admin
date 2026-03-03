@@ -13,5 +13,6 @@ export default function useAuth() {
     setField('user', null)
     setField('isLoggedIn', false)
   }
+  
   return { isLoggedIn, authUser, setAuth, logOut };
 }

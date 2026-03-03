@@ -10,6 +10,8 @@ import {Button} from '@mui/material';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import Accordion from 'ui-component/extended/Accordion';
+import ManagerGuard from 'utils/access-guards/ManagerGuard';
+
 // ==============================|| SAMPLE PAGE ||============================== //
 
 export default function Shows() {
@@ -30,17 +32,17 @@ export default function Shows() {
 
   const getShowContent = (item) => <></>
   const getAccData = () => shows.map(show => {
-    const actions = <Link to={`/show-details/${show.id}`}><Button>Редактировать</Button></Link>
+    const actions = <ManagerGuard showId={show.id}><Link to={`/show-details/${show.id}`}><Button>Редактировать</Button></Link></ManagerGuard>
     return{title: show.name, id: show.id, content:getShowContent(show), actions: actions }
   }) 
   
-  return (
+  return (<ManagerGuard>
     <MainCard title={"Спектакли (" + shows.length + ")"}>
       <Typography variant="body2">
          
       </Typography>
       <Accordion data={getAccData()} toggle={true}></Accordion>
       
-    </MainCard>
+    </MainCard></ManagerGuard>
   );
 }
