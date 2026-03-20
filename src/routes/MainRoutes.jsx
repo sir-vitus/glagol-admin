@@ -21,6 +21,7 @@ const Users = Loadable(lazy(() => import('views/users')));
 // shows routing
 const Shows = Loadable(lazy(() => import('views/shows')));
 const ShowDetails = Loadable(lazy(() => import('views/shows/ShowDetails')));
+const ShowForm = Loadable(lazy(() => import('views/shows/ShowForm')));
 
 
 // sample page routing
@@ -68,6 +69,14 @@ const MainRoutes = {
     {
       path: '/show-details/:id',
       element: <ShowDetails />
+    },
+    {
+      path: '/show-edit/:id',
+      element: <ShowForm />
+    },
+    {
+      path: '/show-add',
+      element: <ShowForm />
     },
     {
       path: 'color',

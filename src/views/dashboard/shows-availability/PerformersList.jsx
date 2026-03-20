@@ -21,7 +21,7 @@ export default function PerformersList({data}) {
               </Typography>
             </Grid>
             <Grid sx={{p: 1}}>
-              <Typography variant="body1" sx={{ color: 'grey.800' }}>
+              <Typography variant="body1" sx={{ color: 'grey.800',  fontStyle: 'italic' }}>
                {item.comment} 
               </Typography>
             </Grid>

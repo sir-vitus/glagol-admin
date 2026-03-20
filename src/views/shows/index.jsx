@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 // material-ui
 import Typography from '@mui/material/Typography';
-import {Button} from '@mui/material';
-
+import {Button, Fab } from '@mui/material';
+import {Add} from '@mui/icons-material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import Accordion from 'ui-component/extended/Accordion';
 import ManagerGuard from 'utils/access-guards/ManagerGuard';
+import AdminGuard from 'utils/access-guards/AdminGuard';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -42,7 +43,9 @@ export default function Shows() {
          
       </Typography>
       <Accordion data={getAccData()} toggle={true}></Accordion>
-      
-    </MainCard></ManagerGuard>
+    </MainCard><AdminGuard>
+      <Link to={`/show-add`}><Fab color="secondary" aria-label="Add" style={{position: 'fixed', bottom: 20, right: 50}}><Add></Add></Fab></Link>
+    </AdminGuard>
+    </ManagerGuard>
   );
 }
