@@ -27,7 +27,7 @@ export default function Accordion({ data, defaultExpandedId = null, expandIcon, 
     <Box sx={{ width: '100%' }}>
       {data &&
         data.map((item) => (
-          <MuiAccordion
+          <MuiAccordion 
             key={item.id}
             elevation={0}
             defaultExpanded={!item.disabled && item.defaultExpand}
@@ -38,11 +38,11 @@ export default function Accordion({ data, defaultExpandedId = null, expandIcon, 
           >
             <MuiAccordionSummary
               expandIcon={expandIcon || expandIcon === false ? expandIcon : <ExpandMoreIcon />}
-              sx={{ color: 'grey.600', fontWeight: 500 }}
+              sx={{ color: 'grey.600', fontWeight: 500, p: 0 }}
             >
               {item.title}
             </MuiAccordionSummary>
-            <MuiAccordionDetails>{item.content}</MuiAccordionDetails>
+            <MuiAccordionDetails sx={{ p: 0 }}>{item.content}</MuiAccordionDetails>
             {item.actions &&  <MuiAccordionActions>{item.actions}</MuiAccordionActions> }
           </MuiAccordion>
         ))}

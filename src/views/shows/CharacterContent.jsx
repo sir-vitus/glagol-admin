@@ -85,7 +85,7 @@ export default function CharacterContent({item, actors, onUpdate}) {
 
     return (<Stack  spacing={2} key={item.id}> 
           {!editCharacter && (
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'center', justifyContent: 'left' }}>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'stretch', justifyContent: 'left' }}>
               <TextField  id="standard-select-currency" select value={selectedActor} sx={{ minWidth: 200 }}
                  onChange={(e) => setSelectedActor(e.target.value)}>
                 {actors.map((option) => (
@@ -94,8 +94,9 @@ export default function CharacterContent({item, actors, onUpdate}) {
                   </MenuItem>
                 ))}
               </TextField>
+              <Stack direction="row" spacing={2} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
                 <AnimateButton>
-                    <Button disableElevation fullWidth size="medium" type="button" variant="contained" color="primary"
+                    <Button disableElevation size="large" type="button" variant="contained" color="primary"
                       onClick={(e) => handleNewPerformerClick(e, item.id)}>
                         Добавить исполнителя
                     </Button>
@@ -105,34 +106,35 @@ export default function CharacterContent({item, actors, onUpdate}) {
                 {name: 'Редактировать', icon: EditIcon, value: { command: 'edit'}}, 
                 {name: 'Удалить', icon: DeleteIcon, value: { command: 'delete'}}
                 ]} onSelect={handleCharacterMenuSelected}></MoreMenu>
-
+            </Stack>
         </Stack>)}
           {editCharacter && (
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'center', justifyContent: 'left' }}>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'stretch', justifyContent: 'left' }}>
           <CustomFormControl fullWidth>
             <InputLabel htmlFor="txt-character">Название роли</InputLabel>
             <OutlinedInput id="txt-character" type="text" name="txtCharacter" value={character} 
               onChange={(e) => setCharacter(e.target.value)} />
           </CustomFormControl>
+          <Stack direction="row"  spacing={2} sx={{ justifyContent: 'space-between' }}>
                 <AnimateButton>
-                    <Button disableElevation fullWidth size="medium" type="button" variant="contained" color="primary"
+                    <Button disableElevation size="large" type="button" variant="contained" color="primary"
                       onClick={handleCharacterEdited}>
                         Сохранить
                     </Button>
                 </AnimateButton>                
                 <AnimateButton>
-                    <Button disableElevation fullWidth size="medium" type="button" variant="contained" color="secondary"
+                    <Button disableElevation size="large" type="button" variant="contained" color="secondary"
                       onClick={handleCancelEditing}>
                         Отмена
                     </Button>
                 </AnimateButton>                
-             
+             </Stack>
 
         </Stack>)}
 
         <SubCard title="Исполнители">
           {item.performers.map(p => (
-            <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
+            <Stack direction="row" key={p.id} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
        <Typography variant="body2" sx={{ color: 'inherit' }}> {p.name}</Typography>
        <DeleteIconButtonWithConfirmation item={p} onDelete={handleDeletePerformer} />
         </Stack>

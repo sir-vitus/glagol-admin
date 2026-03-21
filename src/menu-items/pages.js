@@ -32,14 +32,14 @@ const pages = {
           title: 'Login',
           type: 'item',
           url: '/pages/login',
-          target: true
+          //target: true
         },
         {
           id: 'register',
           title: 'Register',
           type: 'item',
           url: '/pages/register',
-          target: true
+          //target: true
         }
       ]
     },

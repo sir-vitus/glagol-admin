@@ -31,10 +31,10 @@ export default function ShowsAvailability() {
     //setOpen(true);
   };
 
-  const shows = dates.length ? dates[0].shows : []
+  //const shows = dates.length ? dates[0].shows : []
 
     return (
-        <MainCard title={"Спектакли (" + shows.length + ")"}>
+        <MainCard title={"Планирование"}>
 
     <DatesAccordion dates={dates}></DatesAccordion>
     </MainCard>
