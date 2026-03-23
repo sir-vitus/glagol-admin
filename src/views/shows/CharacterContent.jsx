@@ -19,6 +19,7 @@ import AdminGuard from 'utils/access-guards/AdminGuard';
 import CustomFormControl from 'ui-component/extended/Form/CustomFormControl';
 import SubCard from 'ui-component/cards/SubCard';
 import MoreMenu from 'ui-component/MoreMenu';
+import ConfirmationDialog from 'ui-component/ConfirmationDialog';
 // assets
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -27,11 +28,15 @@ export default function CharacterContent({item, actors, onUpdate}) {
     const [selectedActor, setSelectedActor] = useState('');
     const [character, setCharacter] = useState(item.name);
     const [editCharacter, setEditCharacter] = useState(false);
+    const [openDeleteCharacterDialog, setOpenDeleteCharacterDialog] = useState(false);
 
     const handleCharacterMenuSelected = (selectedValue) => {
         switch(selectedValue.command) {
         case 'edit':
             setEditCharacter(true)
+            break;
+        case 'delete':
+          setOpenDeleteCharacterDialog(true)
             break;
         }
     }
@@ -49,6 +54,21 @@ export default function CharacterContent({item, actors, onUpdate}) {
         setSelectedActor('')
         onUpdate();
     }
+    const handleDeleteCharacter = async (id) => {
+
+      console.log('Deleting character with id: ', id);
+
+      setOpenDeleteCharacterDialog(false)
+      //e.preventDefault()
+      if(!id) return
+      const url = `/shows/character/${id}`;
+      const response = await axiosServices.delete(url, {
+      headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+      }});
+      console.log(response.data)
+      onUpdate();
+    };
     
     const handleDeletePerformer = async (performer) => {
         console.log('Deleting item with id:', performer.characterID, performer.personID);
@@ -107,7 +127,17 @@ export default function CharacterContent({item, actors, onUpdate}) {
                 {name: 'Удалить', icon: DeleteIcon, value: { command: 'delete'}}
                 ]} onSelect={handleCharacterMenuSelected}></MoreMenu>
             </Stack>
-        </Stack>)}
+            <ConfirmationDialog
+              open={openDeleteCharacterDialog}
+              handleClose={() => setOpenDeleteCharacterDialog(false)}
+              handleConfirm={() => handleDeleteCharacter(item.id)}
+              title="Подтверждение удаления"
+              description={`Вы действительно хотите удалить эту роль - ${item.name}?`}
+            />
+            
+        </Stack>
+      
+      )}
           {editCharacter && (
             <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'stretch', justifyContent: 'left' }}>
           <CustomFormControl fullWidth>

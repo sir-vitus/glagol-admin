@@ -42,7 +42,7 @@ export default function ManagersList({item, actors, onUpdate}) {
     }
     return (<>
      <Stack  spacing={2} key={item.id}> <AdminGuard>
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'center', justifyContent: 'left' }}>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ alignItems: 'stretch', justifyContent: 'left' }}>
               <TextField  id="standard-select-currency" select value={selectedActor} sx={{ minWidth: 200 }}
                  onChange={(e) => setSelectedActor(e.target.value)}>
                 {actors && actors.map((option) => (

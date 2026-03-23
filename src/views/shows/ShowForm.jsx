@@ -18,6 +18,7 @@ import Box from '@mui/material/Box';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import axiosServices from 'utils/axios';
 import CustomFormControl from 'ui-component/extended/Form/CustomFormControl';
+import MainCard from 'ui-component/cards/MainCard';
 
 export default function ShowForm() {
   const { id } = useParams(); // Get the 'id' parameter from the URL
@@ -74,6 +75,8 @@ export default function ShowForm() {
 
 
   return (<>
+      <MainCard title={"Новый спектакль."}>
+  
     <CustomFormControl fullWidth error={errName}>
         <InputLabel htmlFor="outlined-adornment-name">Короткое название</InputLabel>
         <OutlinedInput id="outlined-adornment-name" type="text" value={name} onChange={handleChangeName} name="name" />
@@ -89,5 +92,6 @@ export default function ShowForm() {
           </Button>
         </AnimateButton>
       </Box>
+      </MainCard>
   </>)
 }

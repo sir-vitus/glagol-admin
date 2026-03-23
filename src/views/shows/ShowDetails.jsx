@@ -49,9 +49,9 @@ export default function ShowDetails() {
   }, [getActors]);
 
   const mainAccordionData = [
-    {title: <Typography variant='subtitle1' sx={{ color: 'grey.800'}}>Роли</Typography>, id: 1, 
+    {title: <Typography variant='h4' sx={{ color: 'grey.800'}}>Роли</Typography>, id: 1, 
       content: <RolesList item={show} actors={actors} onUpdate={onUpdate}></RolesList>},
-    {title: <Typography variant='subtitle1' sx={{ color: 'grey.800'}}>Помрежи</Typography>, id: 2, 
+    {title: <Typography variant='h4' sx={{ color: 'grey.800'}}>Помрежи</Typography>, id: 2, 
       content: <ManagersList item={show} actors={actors} onUpdate={onUpdate}></ManagersList>},
   ]
 
