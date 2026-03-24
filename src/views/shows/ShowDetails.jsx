@@ -6,11 +6,15 @@ import axios from 'axios';
 // material-ui
 import Typography from '@mui/material/Typography';
 import {ArrowBack} from '@mui/icons-material';
+import Stack from '@mui/material/Stack';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import Accordion from 'ui-component/extended/Accordion';
 import ManagersList from './ManagersList';
 import RolesList from './RolesList';
+// assets
+import EditIcon from '@mui/icons-material/Edit';
+
 
 export default function ShowDetails() {
   const { id } = useParams(); // Get the 'id' parameter from the URL
@@ -59,7 +63,7 @@ export default function ShowDetails() {
         
      
 return (
-    <MainCard title={show.name} secondary={backBtn}>
+    <MainCard title={<Stack direction="row">{show.name}<Link to={`/show-edit/${show.id}`}><EditIcon sx={{ml: 2}} /></Link></Stack> } secondary={backBtn}>
       
       <Accordion data={mainAccordionData} defaultExpandedId={1} toggle={true}></Accordion>
       

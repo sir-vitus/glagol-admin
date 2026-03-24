@@ -1,13 +1,20 @@
 import { useCallback, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // third-party
 import axios from 'axios';
 // material-ui
 import Typography from '@mui/material/Typography';
+import {Button, Fab } from '@mui/material';
+// assets
+import {Add} from '@mui/icons-material';
+
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
+import ManagerGuard from 'utils/access-guards/ManagerGuard';
+import AdminGuard from 'utils/access-guards/AdminGuard';
 //import { getContacts } from '../../store/slices/contact';
 //import axiosServices from '../../utils/axios';
 
@@ -30,7 +37,7 @@ export default function Users() {
     getUsers();
   }, [getUsers]);
   
-  return (
+  return (<AdminGuard>
     <MainCard title="Актёры">
       <Typography variant="body2">
         {users.length} актёров 
@@ -39,5 +46,7 @@ export default function Users() {
         <SubCard key={index}>{user.name}</SubCard>
       ))}
     </MainCard>
+    <Link to={`/user-add`}><Fab color="secondary" aria-label="Add" style={{position: 'fixed', bottom: 20, right: 50}}><Add></Add></Fab></Link>
+    </AdminGuard>
   );
 }

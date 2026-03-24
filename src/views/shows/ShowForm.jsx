@@ -26,16 +26,17 @@ export default function ShowForm() {
   const [name, setName] = useState('');
   const [title, setTitle] = useState('');
   const [errName, setErrName] = useState(false);
+
   const getShow = useCallback(async () => {
     try {
-        if(id) {
-            const response = await axiosServices.get(`/shows/${id}`);
-            if(response && response.data) {
-              setName(response.data.name);
-              setTitle(response.data.title);
-            }
-            
-        }
+      if(id) {
+          const response = await axiosServices.get(`/shows/${id}`);
+          if(response && response.data) {
+            setName(response.data.name);
+            setTitle(response.data.title);
+          }
+          
+      }
     } catch (error) {
       console.log(error);
     }
@@ -47,8 +48,7 @@ export default function ShowForm() {
 
   const handleSaveButtonClick = async (event) => {
     event.preventDefault();
-    console.log('id: ' + id)
-    //m3eE605z8uy
+    //console.log('id: ' + id)
     if(name) {
       const payload = {
         name: name,
@@ -56,13 +56,23 @@ export default function ShowForm() {
       }
       const response = await axiosServices.post(`/shows`, payload);
       console.log(response.status)
-      //const res = await fetcher('/user/m3eE605z8uy1', options)
-      navigate('/shows', { replace: true });
+      handleGoBack();
     } else {
       setErrName(true)
     }
   };
+  const handleCancelButtonClick = async (event) => {
+    event.preventDefault();
+    handleGoBack();
+  };
 
+  const handleGoBack = () => {
+    if(id)
+      navigate('/show-details/' + id.toString(), { replace: true })
+    else
+      navigate('/shows', { replace: true })
+    
+  }
   const handleChangeName = (event) => {
     // Update the state with the new value as the user types
     setName(event.target.value);
@@ -75,7 +85,7 @@ export default function ShowForm() {
 
 
   return (<>
-      <MainCard title={"Новый спектакль."}>
+      <MainCard title={ id ? "Редактирование спектакля" : "Новый спектакль."}>
   
     <CustomFormControl fullWidth error={errName}>
         <InputLabel htmlFor="outlined-adornment-name">Короткое название</InputLabel>
@@ -83,12 +93,19 @@ export default function ShowForm() {
       </CustomFormControl>
     <CustomFormControl fullWidth>
         <InputLabel htmlFor="outlined-adornment-title">Полное название</InputLabel>
-        <OutlinedInput id="outlined-adornment-title" type="text" onChange={handleChangeTitle} name="title" />
+        <OutlinedInput id="outlined-adornment-title" type="text" value={title} onChange={handleChangeTitle} name="title" />
       </CustomFormControl>
       <Box sx={{ mt: 2 }}>
         <AnimateButton>
           <Button color="secondary" fullWidth size="large" type="submit" variant="contained" onClick={handleSaveButtonClick}>
             Сохранить
+          </Button>
+        </AnimateButton>
+      </Box>
+      <Box sx={{ mt: 2 }}>
+        <AnimateButton>
+          <Button color="primary" fullWidth size="large" type="submit" variant="contained" onClick={handleCancelButtonClick}>
+            Отмена
           </Button>
         </AnimateButton>
       </Box>

@@ -17,6 +17,7 @@ const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
 
 // users routing
 const Users = Loadable(lazy(() => import('views/users')));
+const UserForm = Loadable(lazy(() => import('views/users/UserForm')));
 
 // shows routing
 const Shows = Loadable(lazy(() => import('views/shows')));
@@ -60,7 +61,15 @@ const MainRoutes = {
     },
     {
       path: 'users',
-      element: <Users />
+      element: <AuthGuard><Users /></AuthGuard>
+    },
+    {
+      path: '/user-edit/:id',
+      element: <UserForm />
+    },
+    {
+      path: '/user-add',
+      element: <UserForm />
     },
     {
       path: 'shows',
