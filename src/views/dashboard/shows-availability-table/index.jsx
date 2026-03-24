@@ -4,7 +4,13 @@ import { IconCheck, IconAlertTriangle } from '@tabler/icons-react';
 // material-ui
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 // constant
 const icons = { IconCheck, IconAlertTriangle };
 
@@ -31,45 +37,49 @@ export default function ShowsAvailabilityTable() {
   };
 
   const shows = dates.length ? dates[0].shows : []
+  const shortDate = (date) => {
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString()
+    return `${day}.${month}`
+  }
 
-    return (
-        <MainCard title={"Спектакли (" + shows.length + ")"}>
-    
-    <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-      <thead>
-        <tr style={{ backgroundColor: '#f2f2f2' }}>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Спектакли</th>
-
-          {dates.map((date) => (
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>{(new Date(date.date)).toLocaleDateString()}</th>
-
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {shows.map((show, idx) => (
-          <tr key={show.id}>
-            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{show.name}</td>
+  return (
+    <MainCard title={"Спектакли (" + shows.length + ")"}>
+      <TableContainer component={Paper} sx={{ maxHeight: 500 }}>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ position: 'sticky', left: 0, zIndex: 10, background: '#f2f2f2' }}>Спектакли</TableCell>
             {dates.map((date) => (
-            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{
-                date.shows[idx].color == 'green' ?       
-                    <Tooltip title="Да">
-                        <IconButton aria-label="yes" onClick={handleClick}>
-                          <IconCheck />
-                        </IconButton>
-                      </Tooltip> :  <Tooltip title={date.shows[idx].characters.filter(c=>c.color==='red').map(c=>c.name).join(', ')}>
-                        <IconButton aria-label="no" onClick={handleClick}>
-                          <IconAlertTriangle />
-                        </IconButton>
-                      </Tooltip>
-                
-            }</td>
-
+              <TableCell sx={{ background: '#f2f2f2' }}>{shortDate(new Date(date.date))}</TableCell>
+            ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          {shows.map((show, idx) => (
+            <TableRow  key={show.id}>
+              <TableCell component="th" scope="row" sx={{ position: 'sticky', left: 0, zIndex: 1, background: 'white' }}>{show.name}</TableCell>
+            {dates.map((date) => (
+              <TableCell>
+                {date.shows[idx].color == 'green' ?       
+                  <Tooltip title="Да">
+                    <IconButton aria-label="yes" onClick={handleClick}>
+                      <IconCheck />
+                    </IconButton>
+                  </Tooltip> :  
+                  <Tooltip title={date.shows[idx].characters.filter(c=>c.color==='red').map(c=>c.name).join(', ')}>
+                    <IconButton aria-label="no" onClick={handleClick}>
+                      <IconAlertTriangle />
+                    </IconButton>
+                  </Tooltip>
+                } 
+              </TableCell>
+            ))}
+            </TableRow >
           ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </MainCard>
     )
 }
