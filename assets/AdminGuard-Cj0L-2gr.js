@@ -1,1 +1,0 @@
-import{u as o,P as r}from"./index-COUm1JWJ.js";const u=({children:s})=>{const{isLoggedIn:e,authUser:n}=o();return e&&n.roles.includes("Admins")?s:null};u.propTypes={children:r.node,showId:r.number};export{u as A};
