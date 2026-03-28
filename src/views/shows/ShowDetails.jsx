@@ -63,7 +63,7 @@ export default function ShowDetails() {
         
      
 return (
-    <MainCard title={<Stack direction="row">{show.name}<Link to={`/show-edit/${show.id}`}><EditIcon sx={{ml: 2}} /></Link></Stack> } secondary={backBtn}>
+    <MainCard title={<Stack direction="row">{show.name}<Link to={`/show-edit/${show.id}`}><EditIcon color='action' sx={{ml: 2}} /></Link></Stack> } secondary={backBtn}>
       
       <Accordion data={mainAccordionData} defaultExpandedId={1} toggle={true}></Accordion>
       

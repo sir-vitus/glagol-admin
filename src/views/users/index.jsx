@@ -5,9 +5,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 // material-ui
 import Typography from '@mui/material/Typography';
-import {Button, Fab } from '@mui/material';
+import {Button, Fab, Stack } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+//import Edit from '@mui/icons-material/Edit';
+import Tooltip from '@mui/material/Tooltip';
 // assets
-import {Add} from '@mui/icons-material';
+import {Add, Edit} from '@mui/icons-material';
 
 
 // project imports
@@ -43,7 +48,15 @@ export default function Users() {
         {users.length} актёров 
       </Typography>
       {users.map((user, index) => (
-        <SubCard key={index}>{user.name}</SubCard>
+        <Stack key={index} direction="row" spacing={2} sx={{ p: 1, alignItems: 'center', justifyContent: 'space-between' }}>
+          <Typography variant="body2">{user.name}</Typography>
+          <Tooltip title="Редактировать">
+            <Link to={`/user-edit/${user.personID}`}>
+              <EditIcon color="action"  />
+            </Link>
+          </Tooltip>
+          
+        </Stack>
       ))}
     </MainCard>
     <Link to={`/user-add`}><Fab color="secondary" aria-label="Add" style={{position: 'fixed', bottom: 20, right: 50}}><Add></Add></Fab></Link>

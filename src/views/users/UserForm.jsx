@@ -34,6 +34,8 @@ export default function UserForm() {
           if(response && response.data) {
             setLastName(response.data.lastName);
             setFirstName(response.data.firstName);
+            setMiddleName(response.data.middleName);
+            setEmail(response.data.email);
           }
           
       }
@@ -56,6 +58,7 @@ export default function UserForm() {
         middleName: middleName,
         email: email
       }
+      if(id) payload.personID = id;
       const response = await axiosServices.post(`/user`, payload);
       console.log(response.status)
       handleGoBack();
