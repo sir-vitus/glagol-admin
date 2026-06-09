@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-const ConfirmationDialog = ({ open, handleClose, handleConfirm, title, description }) => {
+const ConfirmationDialog = ({ open, handleClose, handleConfirm, title, description, confirmText = 'Удалить', cancelText = 'Отмена' }) => {
   return (
     <Dialog
       open={open}
@@ -22,10 +22,10 @@ const ConfirmationDialog = ({ open, handleClose, handleConfirm, title, descripti
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Отмена
+          {cancelText}
         </Button>
         <Button onClick={handleConfirm} color="error" autoFocus>
-          Удалить
+          {confirmText}
         </Button>
       </DialogActions>
     </Dialog>

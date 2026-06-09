@@ -59,7 +59,7 @@ export default function ShowDetails() {
       content: <ManagersList item={show} actors={actors} onUpdate={onUpdate}></ManagersList>},
   ]
 
-    const backBtn = <Link to={`/shows`}><ArrowBack></ArrowBack></Link>
+    const backBtn = <Link to={(show.status === 2 ? '/archive' : '') + '/shows' }><ArrowBack></ArrowBack></Link>
         
      
 return (

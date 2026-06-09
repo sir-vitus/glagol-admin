@@ -17,6 +17,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import axiosServices from 'utils/axios';
 import CustomFormControl from 'ui-component/extended/Form/CustomFormControl';
 import MainCard from 'ui-component/cards/MainCard';
+import ConfirmationDialog from 'ui-component/ConfirmationDialog';
 
 export default function UserForm() {
   const { id } = useParams(); // Get the 'id' parameter from the URL
@@ -26,6 +27,7 @@ export default function UserForm() {
   const [middleName, setMiddleName] = useState('');
   const [email, setEmail] = useState('');
   const [errLastName, setErrLastName] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const getUser = useCallback(async () => {
     try {
@@ -67,6 +69,23 @@ export default function UserForm() {
   const handleCancelButtonClick = async (event) => {
     event.preventDefault();
     handleGoBack();
+  };
+  const handleDeleteButtonClick = async (event) => {
+    event.preventDefault();
+    setOpenDeleteDialog(true);
+  };
+  const handleDeleteUser = async (event) => {
+    event.preventDefault();
+    //console.log('id: ' + id)
+    if(id) {
+      const payload = {
+        personID: id,
+        type: 3,
+      }
+      const response = await axiosServices.post(`/user`, payload);
+      console.log(response.status)
+      handleGoBack();
+    } 
   };
 
   const validate = () => {
@@ -137,6 +156,20 @@ export default function UserForm() {
           </Button>
         </AnimateButton>
       </Box>
+      {id && (<><Box sx={{ mt: 2 }}>
+        <AnimateButton>
+          <Button color="error" fullWidth size="large" type="submit" variant="contained" onClick={handleDeleteButtonClick}>
+            Удалить
+          </Button>
+        </AnimateButton>
+      </Box>
+            <ConfirmationDialog
+              open={openDeleteDialog}
+              handleClose={() => setOpenDeleteDialog(false)}
+              handleConfirm={handleDeleteUser}
+              title="Подтверждение удаления"
+              description={`Вы действительно хотите удалить пользователя ${lastName} ${firstName}?`}
+            /></>)}
       </MainCard>
   </>)
 }

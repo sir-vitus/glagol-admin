@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 // third-party
 import axios from 'axios';
 // material-ui
@@ -18,14 +18,18 @@ import AdminGuard from 'utils/access-guards/AdminGuard';
 export default function Shows() {
   
   const [shows, setShows] = useState([]);
+  const location = useLocation();
   const getShows = useCallback(async () => {
     try {
-      const response = await axios.get('https://glagoltheatre.ru/api/shows');
+      const url = 'https://glagoltheatre.ru/api/shows' + ((mode() === 'archive') ? '/archive' : '')
+      const response = await axios.get(url);
       setShows(response.data);
     } catch (error) {
       console.log(error);
     }
   }, []);
+
+  const mode = () => (location.pathname === '/archive/shows') ? 'archive' : 'default';
 
   useEffect(() => {
     getShows();

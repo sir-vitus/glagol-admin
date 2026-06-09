@@ -56,10 +56,6 @@ const MainRoutes = {
       ]
     },
     {
-      path: 'typography',
-      element: <UtilsTypography />
-    },
-    {
       path: 'users',
       element: <AuthGuard><Users /></AuthGuard>
     },
@@ -86,6 +82,23 @@ const MainRoutes = {
     {
       path: '/show-add',
       element: <ShowForm />
+    },
+    {
+      path: 'archive',
+      children: [
+        {
+          element: <AuthGuard><Users /></AuthGuard>,
+          path: 'users',
+        },
+        {
+          element: <AuthGuard><Shows /></AuthGuard>,
+          path: 'shows',
+        },
+      ]
+    },
+    {
+      path: 'typography',
+      element: <UtilsTypography />
     },
     {
       path: 'color',

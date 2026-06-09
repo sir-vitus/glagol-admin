@@ -55,7 +55,6 @@ export default function ShowForm() {
         title: title
       }
       const response = await axiosServices.post(`/shows`, payload);
-      console.log(response.status)
       handleGoBack();
     } else {
       setErrName(true)
