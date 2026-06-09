@@ -6,7 +6,7 @@ import admin from './admin';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard, admin, pages, other]
+  items: [dashboard, admin]//, pages, other
 };
 
 export default menuItems;
