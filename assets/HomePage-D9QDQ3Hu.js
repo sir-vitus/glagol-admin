@@ -1,0 +1,1 @@
+import{j as r,M as a,T as e}from"./index-CW5bcn9r.js";function n(){return r.jsx(r.Fragment,{children:r.jsx(a,{title:"Начало осмотра",children:r.jsx(e,{variant:"body2",children:"Начало осмотра."})})})}export{n as default};
