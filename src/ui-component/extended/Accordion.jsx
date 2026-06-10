@@ -13,7 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // ==============================|| ACCORDION ||============================== //
 
-export default function Accordion({ data, defaultExpandedId = null, expandIcon, square, toggle }) {
+export default function Accordion({ data, defaultExpandedId = null, expandIcon, square, toggle, styles = {} }) {
   const [expanded, setExpanded] = useState(null);
   const handleChange = (panel) => (event, newExpanded) => {
     toggle && setExpanded(newExpanded ? panel : false);
@@ -38,11 +38,11 @@ export default function Accordion({ data, defaultExpandedId = null, expandIcon, 
           >
             <MuiAccordionSummary
               expandIcon={expandIcon || expandIcon === false ? expandIcon : <ExpandMoreIcon />}
-              sx={{ color: 'grey.600', fontWeight: 500, p: 0 }}
+              sx={{ color: 'grey', fontWeight: 500, p: 1, borderRadius: 2, ...styles.summary}}
             >
               {item.title}
             </MuiAccordionSummary>
-            <MuiAccordionDetails sx={{ p: 0 }}>{item.content}</MuiAccordionDetails>
+            <MuiAccordionDetails sx={{ p: 1, borderRadius: 2, ...styles.details }}>{item.content}</MuiAccordionDetails>
             {item.actions &&  <MuiAccordionActions>{item.actions}</MuiAccordionActions> }
           </MuiAccordion>
         ))}

@@ -9,6 +9,7 @@ import AuthGuard from 'utils/access-guards/AuthGuard';
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const DashboardShowsAvailability = Loadable(lazy(() => import('views/dashboard/shows-availability')));
 const DashboardShowsAvailabilityTable = Loadable(lazy(() => import('views/dashboard/shows-availability-table')));
+const HomePage = Loadable(lazy(() => import('views/pages/HomePage')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -36,7 +37,7 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardShowsAvailability />
+      element: <HomePage />
     },
     {
       path: 'dashboard',
