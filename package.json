@@ -2,6 +2,7 @@
   "name": "berry-material-react-js",
   "version": "5.1.0",
   "private": true,
+  "homepage__": "https://sir-vitus.github.io/glagol-admin",
   "dependencies": {
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",

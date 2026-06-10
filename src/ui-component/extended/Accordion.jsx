@@ -38,7 +38,7 @@ export default function Accordion({ data, defaultExpandedId = null, expandIcon, 
           >
             <MuiAccordionSummary
               expandIcon={expandIcon || expandIcon === false ? expandIcon : <ExpandMoreIcon />}
-              sx={{ color: 'grey.light', fontWeight: 500, p: [0, 1, 2], ...styles.summary}}
+              sx={{ color: 'grey.600', fontWeight: 500, p: [0, 1, 2], ...styles.summary}}
             >
               {item.title}
             </MuiAccordionSummary>
