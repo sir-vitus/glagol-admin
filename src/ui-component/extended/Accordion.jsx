@@ -38,11 +38,11 @@ export default function Accordion({ data, defaultExpandedId = null, expandIcon, 
           >
             <MuiAccordionSummary
               expandIcon={expandIcon || expandIcon === false ? expandIcon : <ExpandMoreIcon />}
-              sx={{ color: 'grey', fontWeight: 500, p: 1, borderRadius: 2, ...styles.summary}}
+              sx={{ color: 'grey.light', fontWeight: 500, p: [0, 1, 2], ...styles.summary}}
             >
               {item.title}
             </MuiAccordionSummary>
-            <MuiAccordionDetails sx={{ p: 1, borderRadius: 2, ...styles.details }}>{item.content}</MuiAccordionDetails>
+            <MuiAccordionDetails sx={{ p: [0, 1, 2], ...styles.details }}>{item.content}</MuiAccordionDetails>
             {item.actions &&  <MuiAccordionActions>{item.actions}</MuiAccordionActions> }
           </MuiAccordion>
         ))}
