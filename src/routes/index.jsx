@@ -8,7 +8,7 @@ import MainRoutes from './MainRoutes';
 
 //const router = createBrowserRouter([MainRoutes, AuthenticationRoutes], {
 const router = createHashRouter([MainRoutes, AuthenticationRoutes], {
-  basename: import.meta.env.VITE_APP_BASE_NAME.slice(0, -1)
+  //basename: import.meta.env.VITE_APP_BASE_NAME.slice(0, -1)
 });
 console.log('router base:' + router.basename)
 export default router;
