@@ -27,5 +27,5 @@ export default function ShowsAccordion({shows}) {
             </Grid>
           </Grid>
     return{ title: title, id: idx, content:getShowContent(show)}}) 
-    return (<Accordion data={getAccData()} toggle={true}></Accordion>)
+    return (<Accordion data={getAccData()} toggle={true} styles={{ summary: { bgcolor: '#ede9f3', borderRadius: 3}}}></Accordion>)
 }

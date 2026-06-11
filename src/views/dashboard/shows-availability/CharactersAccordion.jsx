@@ -23,5 +23,5 @@ export default function CharactersAccordion({data}) {
             </Grid>
           </Grid>
     return{ title: title, id: idx, content:getShowContent(item)}}) 
-    return (<Accordion data={getAccData()} toggle={true} styles={{ summary: { bgcolor: '#ede9f3', borderRadius: 3}}}></Accordion>)
+    return (<Accordion data={getAccData()} toggle={true} styles={{ summary: { bgcolor: 'transparent', borderRadius: 3}}}></Accordion>)
 }
