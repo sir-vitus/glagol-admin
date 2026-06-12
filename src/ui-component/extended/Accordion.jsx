@@ -34,7 +34,7 @@ export default function Accordion({ data, defaultExpandedId = null, expandIcon, 
             expanded={(!toggle && !item.disabled && item.expanded) || (toggle && expanded === item.id)}
             disabled={item.disabled}
             square={square}
-            onChange={handleChange(item.id)}
+            onChange={handleChange(item.id)} sx={styles.itemContainer}
           >
             <MuiAccordionSummary
               expandIcon={expandIcon || expandIcon === false ? expandIcon : <ExpandMoreIcon />}
