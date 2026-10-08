@@ -1,3 +1,17 @@
+# Custom Notes:
+# push to GIT:
+
+git add .
+git commit -m "Update availability table to use grey responses"
+git push origin main
+
+# deploy
+
+npm run deploy
+
+
+
+
 # Berry Free React Material UI Admin Template
 https://github.com/codedthemes/berry-free-react-admin-template#documentation
 Docunentation:

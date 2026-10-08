@@ -107,28 +107,63 @@ export default function ShowsAvailabilityTable() {
                 >
                   {show.name}
                 </TableCell>
+                
                 {dates.map((date) => {
-                  // Безопасное обращение к данным
                   const showData = date.shows?.[idx];
-                  if (!showData) return null;
-
-                  const isGreen = showData.color === 'green';
                   
+                  if (!showData) return null; 
+
+                  let icon = null;
+                  let tooltipTitle = '';
+                  let color = 'inherit'; 
+
+                  // Логика определения цвета, иконки и текста подсказки
+                  switch (showData.color) {
+                    case 'green':
+                      icon = <IconCheck style={{ width: '1em', height: '1em' }} />;
+                      tooltipTitle = "Все исполнители доступны";
+                      color = 'success.main'; 
+                      break;
+                    
+                    case 'grey':
+                      icon = <IconHelp style={{ width: '1em', height: '1em' }} />;
+                      // Ищем персонажей с цветом 'grey'
+                      const greyChars = showData.characters?.filter(c => c.color === 'grey').map(c => c.name);
+                      tooltipTitle = greyChars && greyChars.length > 0 
+                        ? `Нет информации по: ${greyChars.join(', ')}` 
+                        : "Нет информации о составе";
+                      color = 'text.disabled'; // Серый
+                      break;
+
+                    case 'red':
+                      icon = <IconAlertTriangle style={{ width: '1em', height: '1em' }} />;
+                      // Ищем персонажей с цветом 'red'
+                      const redChars = showData.characters?.filter(c => c.color === 'red').map(c => c.name);
+                      tooltipTitle = redChars && redChars.length > 0 
+                        ? `Недоступны: ${redChars.join(', ')}` 
+                        : "Есть недоступные исполнители";
+                      color = 'error.main'; // Красный
+                      break;
+                    
+                    default:
+                      icon = <IconHelp style={{ width: '1em', height: '1em' }} />;
+                      tooltipTitle = "Неизвестный статус";
+                      color = 'warning.main';
+                      break;
+                  }
+
                   return (
                     <TableCell key={`${date.date}-${show.id}`} sx={commonCellSx}>
-                      {isGreen ? (       
-                        <Tooltip title="Да">
-                          <IconButton aria-label="yes" onClick={handleClick} size="small">
-                            <IconCheck style={{ width: '1em', height: '1em' }} />
-                          </IconButton>
-                        </Tooltip>
-                      ) : (  
-                        <Tooltip title={showData.characters?.filter(c => c.color === 'red').map(c => c.name).join(', ') || 'Нет доступных мест'}>
-                          <IconButton aria-label="no" onClick={handleClick} size="small">
-                            <IconAlertTriangle style={{ width: '1em', height: '1em' }} />
-                          </IconButton>
-                        </Tooltip>
-                      )}
+                      <Tooltip title={tooltipTitle}>
+                        <IconButton 
+                          aria-label={`status-${showData.color}`} 
+                          onClick={handleClick} 
+                          size="small"
+                          sx={{ color: color }} 
+                        >
+                          {icon}
+                        </IconButton>
+                      </Tooltip>
                     </TableCell>
                   );
                 })}
