@@ -26,6 +26,7 @@ export default function UserForm() {
   const [lastName, setLastName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [email, setEmail] = useState('');
+  const [vkUserID, setVkUserID] = useState('');
   const [errLastName, setErrLastName] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -38,6 +39,7 @@ export default function UserForm() {
             setFirstName(response.data.firstName);
             setMiddleName(response.data.middleName);
             setEmail(response.data.email);
+            setVkUserID(response.data.vkUserID);
           }
           
       }
@@ -58,7 +60,8 @@ export default function UserForm() {
         firstName: firstName,
         lastName: lastName,
         middleName: middleName,
-        email: email
+        email: email,
+        vkUserID: vkUserID
       }
       if(id) payload.personID = id;
       const response = await axiosServices.post(`/user`, payload);
@@ -121,6 +124,10 @@ export default function UserForm() {
     // Update the state with the new value as the user types
     setEmail(event.target.value);
   };
+  const handleChangeVkUserID = (event) => {
+    // Update the state with the new value as the user types
+    setVkUserID(event.target.value);
+  };
 
 
   return (<>
@@ -141,6 +148,10 @@ export default function UserForm() {
     <CustomFormControl fullWidth>
         <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
         <OutlinedInput id="outlined-adornment-email" type="text" value={email} onChange={handleChangeEmail} name="email" />
+      </CustomFormControl>
+    <CustomFormControl fullWidth>
+        <InputLabel htmlFor="outlined-adornment-vkuserid">ВК ID</InputLabel>
+        <OutlinedInput id="outlined-adornment-vkuserid" type="text" value={vkUserID} onChange={handleChangeVkUserID} name="vkUserID" />
       </CustomFormControl>
       <Box sx={{ mt: 2 }}>
         <AnimateButton>
